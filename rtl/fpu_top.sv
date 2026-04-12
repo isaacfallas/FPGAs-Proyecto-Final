@@ -2,19 +2,11 @@
 // D3: FPU Time-Multiplexed SIMD
 // ============================================================================
 // Arquitectura:
-//   - Reutiliza el core FP64 de D2
-//   - Procesa operaciones SIMD secuencialmente:
-//     * FP64: 1 operación → 1 ciclo
-//     * FP32: 2 operaciones → 2 ciclos (low, high)
-//     * FP16: 4 operaciones → 4 ciclos (0, 1, 2, 3)
-//
-// Trade-off vs D1 (SIMD paralelo):
-//   - Menor área (1 core vs 7)
-//   - Mayor latencia para SIMD
-//
-// Trade-off vs D2 (sin SIMD):
-//   - Soporte SIMD completo
-//   - Misma área que D2
+//   - FP64 core reutilization
+//   - Process SIMD operations sequentially
+//     * FP64: 1 op → 1 cicle
+//     * FP32: 2 op → 2 icles (low, high)
+//     * FP16: 4 op → 4 icles (0, 1, 2, 3)
 // ============================================================================
 
 module fpu_top
@@ -22,6 +14,7 @@ module fpu_top
 (
     input  logic             clk,
     input  logic             rst_n,
+    input  logic             ce,
     
     // Entrada
     input  logic             valid_in,
@@ -38,32 +31,40 @@ module fpu_top
 );
 
     // ========================================================================
+    // Chip Enable (ce) for blackboxing
+    // ========================================================================
+    // The chip enable is not used functionality
+    // only for HLS blackboxing purposes
+    logic not_used_ce;
+    asign not_used_ce = ce;
+
+    // ========================================================================
     // FSM States
     // ========================================================================
-    // La FSM usa estados "WAIT_*" para capturar resultado y "PROC_*" para procesar
+    // The FSM uses the WAIT_* states to capture results and PROC_* states for processing
     
     typedef enum logic [3:0] {
         IDLE,
-        PROC_FP64,       // Procesando FP64
-        WAIT_FP64,       // Esperando resultado FP64
-        PROC_FP32_LO,    // Procesando FP32 parte baja
-        WAIT_FP32_LO,    // Esperando resultado FP32 parte baja
-        PROC_FP32_HI,    // Procesando FP32 parte alta
-        WAIT_FP32_HI,    // Esperando resultado FP32 parte alta
-        PROC_FP16_0,     // Procesando FP16 slot 0
-        WAIT_FP16_0,     // Esperando resultado FP16 slot 0
-        PROC_FP16_1,     // Procesando FP16 slot 1
-        WAIT_FP16_1,     // Esperando resultado FP16 slot 1
-        PROC_FP16_2,     // Procesando FP16 slot 2
-        WAIT_FP16_2,     // Esperando resultado FP16 slot 2
-        PROC_FP16_3,     // Procesando FP16 slot 3
-        WAIT_FP16_3      // Esperando resultado FP16 slot 3
+        PROC_FP64,       // procesing FP64
+        WAIT_FP64,       // waiting FP64 result
+        PROC_FP32_LO,    // procesing FP32 low
+        WAIT_FP32_LO,    // waiting FP32 low result
+        PROC_FP32_HI,    // procesing FP32 high
+        WAIT_FP32_HI,    // waiting FP32 high result
+        PROC_FP16_0,     // processing FP16 slot 0
+        WAIT_FP16_0,     // waiting FP16 slot 0 result
+        PROC_FP16_1,     // processing FP16 slot 1
+        WAIT_FP16_1,     // waitng FP16 slot 1 result
+        PROC_FP16_2,     // processing FP16 slot 2
+        WAIT_FP16_2,     // waitng FP16 slot 2 result
+        PROC_FP16_3,     // processing FP16 slot 3
+        WAIT_FP16_3      // waitng FP16 slot 3 result
     } state_e;
     
     state_e state, next_state;
 
     // ========================================================================
-    // Registros para almacenar operandos y resultado parcial
+    // registers to store operands and partial results
     // ========================================================================
     
     logic [63:0]      operand_a_reg, operand_b_reg;
@@ -73,10 +74,10 @@ module fpu_top
     fp_exceptions_t   exceptions_reg;
 
     // ========================================================================
-    // Determinar slot actual basado en el estado
+    // determine slot based on current state
     // ========================================================================
     
-    logic [1:0] current_slot;  // 0-3 para FP16, 0-1 para FP32
+    logic [1:0] current_slot;  // 0-3 for FP16, 0-1 for FP32
     
     always_comb begin
         case (state)
@@ -91,7 +92,7 @@ module fpu_top
     end
 
     // ========================================================================
-    // Selección de operando actual según el estado
+    // selects current operand based on current state
     // ========================================================================
     
     logic [63:0] current_operand_a, current_operand_b;
@@ -155,7 +156,7 @@ module fpu_top
     end
 
     // ========================================================================
-    // Stage 1: Input Unpacking (Combinacional)
+    // Stage 1: Input Unpacking (combinational)
     // ========================================================================
     
     fp_internal_t a_unpacked, b_unpacked;
@@ -173,11 +174,11 @@ module fpu_top
     );
 
     // ========================================================================
-    // Stage 2: Execution Core (Combinacional)
+    // Stage 2: Execution Core (combinational)
     // ========================================================================
     
     logic core_valid_in;
-    // El core procesa cuando estamos en estado PROC_*
+    // the core processes when on PROC_* states
     always_comb begin
         case (state)
             PROC_FP64, PROC_FP32_LO, PROC_FP32_HI,
@@ -205,7 +206,7 @@ module fpu_top
     );
 
     // ========================================================================
-    // Stage 3: Output Packing (Combinacional)
+    // Stage 3: Output Packing (combinational)
     // ========================================================================
     
     logic [63:0] packed_result;
@@ -294,7 +295,7 @@ module fpu_top
                     end
                 end
                 
-                // En estados WAIT_* capturamos el resultado
+                // on WAIT_* states we capture the results
                 WAIT_FP64: begin
                     result_reg     <= packed_result;
                     exceptions_reg <= core_exceptions;
@@ -334,14 +335,14 @@ module fpu_top
                 end
                 
                 default: begin
-                    // No hacer nada en estados PROC_*
+                    // do nothing on PROC_* states
                 end
             endcase
         end
     end
 
     // ========================================================================
-    // Salidas
+    // outputs
     // ========================================================================
     
     assign precision_out = precision_reg;
