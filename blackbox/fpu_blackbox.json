@@ -1,0 +1,97 @@
+{
+  "c_files": [
+    {
+      "c_file": "fpu_blackbox.cpp",
+      "cflag": "--std=c++14"
+    }
+  ],
+  "c_function_name": "fpu_top",
+  "rtl_files": [
+    "fpu_top.sv"
+  ],
+  "c_parameters": [
+    {
+      "c_name": "valid_in",
+      "c_port_direction": "in",
+      "rtl_ports": {
+        "data_read_in": "valid_in"
+      }
+    },
+    {
+      "c_name": "precision",
+      "c_port_direction": "in",
+      "rtl_ports": {
+        "data_read_in": "precision"
+      }
+    },
+    {
+      "c_name": "op",
+      "c_port_direction": "in",
+      "rtl_ports": {
+        "data_read_in": "op"
+      }
+    },
+    {
+      "c_name": "operand_a",
+      "c_port_direction": "in",
+      "rtl_ports": {
+        "data_read_in": "operand_a"
+      }
+    },
+    {
+      "c_name": "operand_b",
+      "c_port_direction": "in",
+      "rtl_ports": {
+        "data_read_in": "operand_b"
+      }
+    }
+  ],
+  "c_return": [
+    {
+    "c_port_direction": "out",
+    "rtl_ports": {
+        "data_write_out": "valid_out"
+    }
+    },
+    {
+    "c_port_direction": "out",
+    "rtl_ports": {
+        "data_write_out": "precision_out"
+    }
+    },
+    {
+    "c_port_direction": "out",
+    "rtl_ports": {
+        "data_write_out": "result"
+    }
+    },
+    {
+    "c_port_direction": "out",
+    "rtl_ports": {
+        "data_write_out": "exceptions"
+    }
+    }
+  ],
+  "rtl_top_module_name": "fpu_top",
+  "rtl_performance": {
+    "II": "1",
+    "latency": "1"
+  },
+  "rtl_resource_usage": {
+    "BRAM": "0",
+    "DSP": "0",
+    "FF": "0",
+    "LUT": "0",
+    "URAM": "0"
+  },
+  "rtl_common_signal": {
+    "module_clock": "clk",
+    "module_reset": "rst_n",
+    "module_clock_enable": "ap_ce",
+    "ap_ctrl_chain_protocol_idle": "",
+    "ap_ctrl_chain_protocol_start": "",
+    "ap_ctrl_chain_protocol_ready": "",
+    "ap_ctrl_chain_protocol_done": "",
+    "ap_ctrl_chain_protocol_continue": ""
+  }
+}
