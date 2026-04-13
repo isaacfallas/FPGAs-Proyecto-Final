@@ -274,6 +274,7 @@ Alternativamente, para compilar sin ejecutar:
 make compile
 ```
 
+```
 Architecture: Single FP64 core, sequential SIMD processing  FP64: 1 cycle, FP32 (2 operations packed): 2 cycles, FP16 (4 operations packed): 4 cycles
 
 [TEST 1] FP64 ADD: 1.0 + 2.0 (FP64)  A = 1.000000, B = 2.000000  PASS: Result = 3.000000 (expected 3.000000)
@@ -299,7 +300,7 @@ Architecture: Single FP64 core, sequential SIMD processing  FP64: 1 cycle, FP32 
 [TEST 11] FP16 SIMD MUL (FP16 SIMD)  A = {4.000000, 3.000000, 2.000000, 1.000000}  B = {2.000000, 3.000000, 4.000000, 5.000000}  PASS: Result = {8.000000, 9.000000, 8.000000, 5.000000}
 
 [TEST 12] FP16 SIMD DIV (FP16 SIMD)  A = {8.000000, 6.000000, 4.000000, 2.000000}  B = {2.000000, 3.000000, 2.000000, 1.000000}  PASS: Result = {4.000000, 2.000000, 2.000000, 2.000000}
-
+```
 
 ### Resultados Esperados
 ```
