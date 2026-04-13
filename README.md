@@ -4,7 +4,7 @@ https://github.com/isaacfallas/FPGAs-Proyecto-Final
 
 ## Descripción General
 
-Es una unidad de punto flotante (FPU) que implementa operaciones SIMD mediante multiplexación temporal. Utiliza un único core de 64 bits para procesar secuencialmente múltiples operaciones de menor precisión, logrando un balance óptimo entre área de silicio y funcionalidad SIMD.
+Este proyecto presenta una unidad de punto flotante (FPU) que implementa operaciones SIMD mediante multiplexación temporal. Utiliza un único core de 64 bits para procesar secuencialmente múltiples operaciones de menor precisión.
 
 ## Arquitectura
 
@@ -263,103 +263,88 @@ Módulo principal con FSM de secuenciamiento:
 - Multiplexado de slots de operandos
 - Acumulación de resultados parciales
 
-## Comparación con Otras Arquitecturas
-
-| Característica | D1 (SIMD Paralelo) | D2 (Unified) | **D3 (TM-SIMD)** |
-|---------------|-------------------|--------------|------------------|
-| Cores FPU | 7 | 1 | **1** |
-| Área relativa | Alta | Baja | **Baja** |
-| FP64 latencia | 1 ciclo | 1 ciclo | **2 ciclos** |
-| FP32 SIMD | ✅ 1 ciclo | ❌ | **✅ 4 ciclos** |
-| FP16 SIMD | ✅ 1 ciclo | ❌ | **✅ 8 ciclos** |
-| Throughput FP64 | 1 op/ciclo | 1 op/ciclo | **0.5 op/ciclo** |
-| Throughput FP32 | 2 ops/ciclo | 1 op/ciclo | **0.5 ops/ciclo** |
-| Throughput FP16 | 4 ops/ciclo | 1 op/ciclo | **0.5 ops/ciclo** |
-| Complejidad | Alta | Media | **Media** |
-
-## Ventajas del Diseño
-
-1. **Área mínima**: Un solo core FP64 reutilizado para todas las precisiones
-2. **SIMD completo**: Soporta operaciones vectoriales en FP16 y FP32
-3. **Simplicidad**: FSM clara para control de secuenciamiento
-4. **Verificabilidad**: Más fácil de verificar que arquitecturas paralelas
-5. **Flexibilidad**: Fácil agregar más precisiones o operaciones
-
-## Limitaciones
-
-1. **Latencia**: Mayor latencia para operaciones SIMD vs arquitectura paralela
-2. **Throughput**: Menor throughput pico que D1
-3. **No pipeline**: Las operaciones no se pueden encolar
-
 ## Simulación
 
+### Compilación y ejecución con Makefile
+```bash
+make clean && make run
+```
+Alternativamente, para compilar sin ejecutar:
+```bash
+make compile
+```
+
 Architecture: Single FP64 core, sequential SIMD processing  FP64: 1 cycle, FP32 (2 operations packed): 2 cycles, FP16 (4 operations packed): 4 cycles
-```
-[TEST 01] FP64 ADD:  A =   1.000000,                                 B = 2.000000                                  PASS: Result =   3.000000
-[TEST 02] FP64 SUB:  A =   3.000000,                                 B = 1.000000                                  PASS: Result =   2.000000
-[TEST 03] FP64 MUL:  A =   2.000000,                                 B = 3.000000                                  PASS: Result =   6.000000
-[TEST 04] FP64 DIV:  A =   8.000000,                                 B = 2.000000                                  PASS: Result =   4.000000
-[TEST 05] FP32 ADD:  A = { 3.000000, 1.000000},                      B = {4.000000, 2.000000}                      PASS: Result = { 7.000000, 3.000000}
-[TEST 06] FP32 SUB:  A = { 5.000000, 4.000000},                      B = {3.000000, 1.000000}                      PASS: Result = { 2.000000, 3.000000}
-[TEST 07] FP32 MUL:  A = { 3.000000, 2.000000},                      B = {4.000000, 3.000000}                      PASS: Result = {12.000000, 6.000000}
-[TEST 08] FP32 DIV:  A = {10.000000, 8.000000},                      B = {2.000000, 4.000000}                      PASS: Result = { 5.000000, 2.000000}
-[TEST 09] FP16 ADD:  A = { 4.000000, 3.000000, 2.000000, 1.000000},  B = {5.000000, 4.000000, 3.000000, 2.000000}  PASS: Result = { 9.000000, 7.000000, 5.000000, 3.000000}
-[TEST 10] FP16 SUB:  A = { 8.000000, 6.000000, 4.000000, 3.000000},  B = {4.000000, 3.000000, 2.000000, 1.000000}  PASS: Result = { 4.000000, 3.000000, 2.000000, 2.000000}
-[TEST 11] FP16 MUL:  A = { 4.000000, 3.000000, 2.000000, 1.000000},  B = {2.000000, 3.000000, 4.000000, 5.000000}  PASS: Result = { 8.000000, 9.000000, 8.000000, 5.000000}
-[TEST 12] FP16 DIV:  A = { 8.000000, 6.000000, 4.000000, 2.000000},  B = {2.000000, 3.000000, 2.000000, 1.000000}  PASS: Result = { 4.000000, 2.000000, 2.000000, 2.000000}
-```
 
-### Compilación con Icarus Verilog
-```bash
-iverilog -g2012 -o sim/sim_fpu \
-  rtl/fpu_pkg.sv \
-  rtl/fp_unpack.sv \
-  rtl/fp_pack.sv \
-  rtl/fpu_core.sv \
-  rtl/fpu_top.sv \
-  testbench/fpu_tb.sv
-```
+[TEST 1] FP64 ADD: 1.0 + 2.0 (FP64)  A = 1.000000, B = 2.000000  PASS: Result = 3.000000 (expected 3.000000)
 
-### Ejecución
-```bash
-vvp sim_fpu
-```
+[TEST 2] FP64 SUB: 3.0 - 1.0 (FP64)  A = 3.000000, B = 1.000000  PASS: Result = 2.000000 (expected 2.000000)
+
+[TEST 3] FP64 MUL: 2.0 * 3.0 (FP64)  A = 2.000000, B = 3.000000  PASS: Result = 6.000000 (expected 6.000000)
+
+[TEST 4] FP64 DIV: 8.0 / 2.0 (FP64)  A = 8.000000, B = 2.000000  PASS: Result = 4.000000 (expected 4.000000)
+
+[TEST 5] FP32 SIMD ADD (FP32 SIMD)  A = {3.000000, 1.000000}, B = {4.000000, 2.000000}  PASS: Result = {7.000000, 3.000000}
+
+[TEST 6] FP32 SIMD SUB (FP32 SIMD)  A = {5.000000, 4.000000}, B = {3.000000, 1.000000}  PASS: Result = {2.000000, 3.000000}
+
+[TEST 7] FP32 SIMD MUL (FP32 SIMD)  A = {3.000000, 2.000000}, B = {4.000000, 3.000000}  PASS: Result = {12.000000, 6.000000}
+
+[TEST 8] FP32 SIMD DIV (FP32 SIMD)  A = {10.000000, 8.000000}, B = {2.000000, 4.000000}  PASS: Result = {5.000000, 2.000000}
+
+[TEST 9] FP16 SIMD ADD (FP16 SIMD)  A = {4.000000, 3.000000, 2.000000, 1.000000}  B = {5.000000, 4.000000, 3.000000, 2.000000}  PASS: Result = {9.000000, 7.000000, 5.000000, 3.000000}
+
+[TEST 10] FP16 SIMD SUB (FP16 SIMD)  A = {8.000000, 6.000000, 4.000000, 3.000000}  B = {4.000000, 3.000000, 2.000000, 1.000000}  PASS: Result = {4.000000, 3.000000, 2.000000, 2.000000}
+
+[TEST 11] FP16 SIMD MUL (FP16 SIMD)  A = {4.000000, 3.000000, 2.000000, 1.000000}  B = {2.000000, 3.000000, 4.000000, 5.000000}  PASS: Result = {8.000000, 9.000000, 8.000000, 5.000000}
+
+[TEST 12] FP16 SIMD DIV (FP16 SIMD)  A = {8.000000, 6.000000, 4.000000, 2.000000}  B = {2.000000, 3.000000, 2.000000, 1.000000}  PASS: Result = {4.000000, 2.000000, 2.000000, 2.000000}
+
 
 ### Resultados Esperados
 ```
 ============================================================
-  D3: Time-Multiplexed SIMD FPU Testbench
+  Time-Multiplexed SIMD FPU Testbench
 ============================================================
   Test Summary: 12/12 tests passed
   *** ALL TESTS PASSED! ***
 ============================================================
 ```
 
-## Integración con AXI
+El waveform se guarda en `sim/fpu_tb.vcd`
 
-Para integrar con el bus AXI Lite, usar `fpu_axi_wrapper.sv` con el siguiente mapa de registros:
+## Componentes y herramientas utilizadas
 
-| Offset | Registro | R/W | Descripción |
-|--------|----------|-----|-------------|
-| 0x00 | OPERAND_A_LO | W | Operando A [31:0] |
-| 0x04 | OPERAND_A_HI | W | Operando A [63:32] |
-| 0x08 | OPERAND_B_LO | W | Operando B [31:0] |
-| 0x0C | OPERAND_B_HI | W | Operando B [63:32] |
-| 0x10 | CONTROL | W | {start, op[1:0], precision[1:0]} |
-| 0x14 | RESULT_LO | R | Resultado [31:0] |
-| 0x18 | RESULT_HI | R | Resultado [63:32] |
-| 0x1C | STATUS | R | {exceptions[3:0], valid} |
+### HDL
+- **SystemVerilog**: Desarrollo de módulos de la FPU
+- **Verilog**: Wrapper de la FPU para Vivado
 
-## Plataforma Objetivo
+### Herramientas de Diseño y Simulación
+- **Icarus Verilog**: Compilador HDL de código abierto (`iverilog`)
 
+- **Vivado Design Suite**
+  - Síntesis RTL
+  - Place & Route en la plataforma objetivo
+  - Generación de bitstream
+
+- **Vitis HLS**: Para blackboxing
+
+### Plataforma Objetivo
 - **FPGA**: AMD/Xilinx Kria KV260
-- **Interfaz**: AXI Lite
-- **Dirección base**: 0xA0000000
 
-## Autores
+-------
 
-Proyecto Final - FPGAs
+### MP-6166 Diseño Avanzado con FPGAs
+### Maestría en Ingeniería Electrónica
+### Instituto Tecnológico de Costa Rica
+### Profesor Ph. D. León Vega, Luis Gerardo
 
-## Licencia
+### Estudiantes
 
-Uso académico
+Aguero Villagra, Leonardo Enrique
+
+Cruz Soto, Federico Alonso
+
+Fallas Mejía, Jorge Isaac
+
+Gutiérrez Quesada, Allan Mauricio
