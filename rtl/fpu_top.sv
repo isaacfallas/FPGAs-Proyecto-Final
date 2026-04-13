@@ -36,7 +36,7 @@ module fpu_top
     // The chip enable is not used functionality
     // only for HLS blackboxing purposes
     logic not_used_ce;
-    asign not_used_ce = ce;
+    assign not_used_ce = ce;
 
     // ========================================================================
     // FSM States
