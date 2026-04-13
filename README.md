@@ -1,18 +1,18 @@
-# D3: Time-Multiplexed SIMD FPU
+# Time-Multiplexed SIMD FPU
 
 ## Descripción General
 
-El D3 es una unidad de punto flotante (FPU) que implementa operaciones SIMD mediante multiplexación temporal. Utiliza un único core de 64 bits para procesar secuencialmente múltiples operaciones de menor precisión, logrando un balance óptimo entre área de silicio y funcionalidad SIMD.
+Es una unidad de punto flotante (FPU) que implementa operaciones SIMD mediante multiplexación temporal. Utiliza un único core de 64 bits para procesar secuencialmente múltiples operaciones de menor precisión, logrando un balance óptimo entre área de silicio y funcionalidad SIMD.
 
 ## Arquitectura
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                              fpu_top (D3)                                   │
+│                                  fpu_top                                    │
 │                                                                             │
 │  ┌───────────────────────────────────────────────────────────────────────┐  │
 │  │                         FSM Sequencer                                 │  │
-│  │  IDLE ──► PROC_* ──► WAIT_* ──► ... ──► IDLE                         │  │
+│  │  IDLE ──► PROC_* ──► WAIT_* ──► ... ──► IDLE                          │  │
 │  │                                                                       │  │
 │  │  Controla el flujo de operaciones SIMD secuenciales                   │  │
 │  └───────────────────────────────────────────────────────────────────────┘  │
@@ -275,7 +275,7 @@ Módulo principal con FSM de secuenciamiento:
 | Throughput FP16 | 4 ops/ciclo | 1 op/ciclo | **0.5 ops/ciclo** |
 | Complejidad | Alta | Media | **Media** |
 
-## Ventajas del D3
+## Ventajas del Diseño
 
 1. **Área mínima**: Un solo core FP64 reutilizado para todas las precisiones
 2. **SIMD completo**: Soporta operaciones vectoriales en FP16 y FP32
@@ -291,21 +291,35 @@ Módulo principal con FSM de secuenciamiento:
 
 ## Simulación
 
+Architecture: Single FP64 core, sequential SIMD processing  FP64: 1 cycle, FP32 (2 operations packed): 2 cycles, FP16 (4 operations packed): 4 cycles
+[TEST 1] FP64 ADD: 1.0 + 2.0 (FP64)  A = 1.000000, B = 2.000000  PASS: Result = 3.000000 (expected 3.000000)
+[TEST 2] FP64 SUB: 3.0 - 1.0 (FP64)  A = 3.000000, B = 1.000000  PASS: Result = 2.000000 (expected 2.000000)
+[TEST 3] FP64 MUL: 2.0 * 3.0 (FP64)  A = 2.000000, B = 3.000000  PASS: Result = 6.000000 (expected 6.000000)
+[TEST 4] FP64 DIV: 8.0 / 2.0 (FP64)  A = 8.000000, B = 2.000000  PASS: Result = 4.000000 (expected 4.000000)
+[TEST 5] FP32 SIMD ADD (FP32 SIMD)  A = {3.000000, 1.000000}, B = {4.000000, 2.000000}  PASS: Result = {7.000000, 3.000000}
+[TEST 6] FP32 SIMD SUB (FP32 SIMD)  A = {5.000000, 4.000000}, B = {3.000000, 1.000000}  PASS: Result = {2.000000, 3.000000}
+[TEST 7] FP32 SIMD MUL (FP32 SIMD)  A = {3.000000, 2.000000}, B = {4.000000, 3.000000}  PASS: Result = {12.000000, 6.000000}
+[TEST 8] FP32 SIMD DIV (FP32 SIMD)  A = {10.000000, 8.000000}, B = {2.000000, 4.000000}  PASS: Result = {5.000000, 2.000000}
+[TEST 9] FP16 SIMD ADD (FP16 SIMD)  A = {4.000000, 3.000000, 2.000000, 1.000000}  B = {5.000000, 4.000000, 3.000000, 2.000000}  PASS: Result = {9.000000, 7.000000, 5.000000, 3.000000}
+[TEST 10] FP16 SIMD SUB (FP16 SIMD)  A = {8.000000, 6.000000, 4.000000, 3.000000}  B = {4.000000, 3.000000, 2.000000, 1.000000}  PASS: Result = {4.000000, 3.000000, 2.000000, 2.000000}
+[TEST 11] FP16 SIMD MUL (FP16 SIMD)  A = {4.000000, 3.000000, 2.000000, 1.000000}  B = {2.000000, 3.000000, 4.000000, 5.000000}  PASS: Result = {8.000000, 9.000000, 8.000000, 5.000000}
+[TEST 12] FP16 SIMD DIV (FP16 SIMD)  A = {8.000000, 6.000000, 4.000000, 2.000000}  B = {2.000000, 3.000000, 2.000000, 1.000000}  PASS: Result = {4.000000, 2.000000, 2.000000, 2.000000}
+
+
 ### Compilación con Icarus Verilog
 ```bash
-cd /home/isaac/d/FPGAs-Proyecto-Final
-iverilog -g2012 -o sim_d3 \
-  rtl/D3/fpu_pkg.sv \
-  rtl/D3/fp_unpack.sv \
-  rtl/D3/fp_pack.sv \
-  rtl/D3/fpu_core.sv \
-  rtl/D3/fpu_top.sv \
-  testbench/D3/fpu_tb.sv
+iverilog -g2012 -o sim/sim_fpu \
+  rtl/fpu_pkg.sv \
+  rtl/fp_unpack.sv \
+  rtl/fp_pack.sv \
+  rtl/fpu_core.sv \
+  rtl/fpu_top.sv \
+  testbench/fpu_tb.sv
 ```
 
 ### Ejecución
 ```bash
-vvp sim_d3
+vvp sim_fpu
 ```
 
 ### Resultados Esperados

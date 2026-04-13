@@ -1,0 +1,334 @@
+[*]
+[*] GTKWave Analyzer v3.3.100 (w)1999-2019 BSI
+[*] Mon Apr 13 03:28:41 2026
+[*]
+[dumpfile] "C:\Users\facruzso\Downloads\Diseño avanzado con fpgas GR 1\Proyecto\FPGAs-Proyecto-Final\sim\fpu_tb.vcd"
+[dumpfile_mtime] "Mon Apr 13 01:39:53 2026"
+[dumpfile_size] 92964
+[savefile] "C:\Users\facruzso\Downloads\Diseño avanzado con fpgas GR 1\Proyecto\FPGAs-Proyecto-Final\sim\video.gtkw"
+[timestart] 0
+[size] 1920 1009
+[pos] -1929 -9
+*-15.000000 383400 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] fpu_tb.
+[treeopen] fpu_tb.dut.
+[sst_width] 197
+[signals_width] 283
+[sst_expanded] 1
+[sst_vpaned_height] 297
+@28
+[color] 6
+fpu_tb.rst_n
+[color] 6
+fpu_tb.clk
+@2028
+^1 C:\Users\facruzso\Downloads\Diseño avanzado con fpgas GR 1\Proyecto\FPGAs-Proyecto-Final\sim\precision.txt
+fpu_tb.precision[1:0]
+[color] 4
+^1 C:\Users\facruzso\Downloads\Diseño avanzado con fpgas GR 1\Proyecto\FPGAs-Proyecto-Final\sim\precision.txt
+fpu_tb.precision_out[1:0]
+[color] 3
+^2 C:\Users\facruzso\Downloads\Diseño avanzado con fpgas GR 1\Proyecto\FPGAs-Proyecto-Final\sim\operations.txt
+fpu_tb.op[1:0]
+@28
+[color] 3
+fpu_tb.valid_in
+@c00022
+[color] 2
+fpu_tb.operand_a[63:0]
+@28
+(0)fpu_tb.operand_a[63:0]
+(1)fpu_tb.operand_a[63:0]
+(2)fpu_tb.operand_a[63:0]
+(3)fpu_tb.operand_a[63:0]
+(4)fpu_tb.operand_a[63:0]
+(5)fpu_tb.operand_a[63:0]
+(6)fpu_tb.operand_a[63:0]
+(7)fpu_tb.operand_a[63:0]
+(8)fpu_tb.operand_a[63:0]
+(9)fpu_tb.operand_a[63:0]
+(10)fpu_tb.operand_a[63:0]
+(11)fpu_tb.operand_a[63:0]
+(12)fpu_tb.operand_a[63:0]
+(13)fpu_tb.operand_a[63:0]
+(14)fpu_tb.operand_a[63:0]
+(15)fpu_tb.operand_a[63:0]
+(16)fpu_tb.operand_a[63:0]
+(17)fpu_tb.operand_a[63:0]
+(18)fpu_tb.operand_a[63:0]
+(19)fpu_tb.operand_a[63:0]
+(20)fpu_tb.operand_a[63:0]
+(21)fpu_tb.operand_a[63:0]
+(22)fpu_tb.operand_a[63:0]
+(23)fpu_tb.operand_a[63:0]
+(24)fpu_tb.operand_a[63:0]
+(25)fpu_tb.operand_a[63:0]
+(26)fpu_tb.operand_a[63:0]
+(27)fpu_tb.operand_a[63:0]
+(28)fpu_tb.operand_a[63:0]
+(29)fpu_tb.operand_a[63:0]
+(30)fpu_tb.operand_a[63:0]
+(31)fpu_tb.operand_a[63:0]
+(32)fpu_tb.operand_a[63:0]
+(33)fpu_tb.operand_a[63:0]
+(34)fpu_tb.operand_a[63:0]
+(35)fpu_tb.operand_a[63:0]
+(36)fpu_tb.operand_a[63:0]
+(37)fpu_tb.operand_a[63:0]
+(38)fpu_tb.operand_a[63:0]
+(39)fpu_tb.operand_a[63:0]
+(40)fpu_tb.operand_a[63:0]
+(41)fpu_tb.operand_a[63:0]
+(42)fpu_tb.operand_a[63:0]
+(43)fpu_tb.operand_a[63:0]
+(44)fpu_tb.operand_a[63:0]
+(45)fpu_tb.operand_a[63:0]
+(46)fpu_tb.operand_a[63:0]
+(47)fpu_tb.operand_a[63:0]
+(48)fpu_tb.operand_a[63:0]
+(49)fpu_tb.operand_a[63:0]
+(50)fpu_tb.operand_a[63:0]
+(51)fpu_tb.operand_a[63:0]
+(52)fpu_tb.operand_a[63:0]
+(53)fpu_tb.operand_a[63:0]
+(54)fpu_tb.operand_a[63:0]
+(55)fpu_tb.operand_a[63:0]
+(56)fpu_tb.operand_a[63:0]
+(57)fpu_tb.operand_a[63:0]
+(58)fpu_tb.operand_a[63:0]
+(59)fpu_tb.operand_a[63:0]
+(60)fpu_tb.operand_a[63:0]
+(61)fpu_tb.operand_a[63:0]
+(62)fpu_tb.operand_a[63:0]
+(63)fpu_tb.operand_a[63:0]
+@1401202
+-group_end
+@29
+[color] 2
+fpu_tb.dut.current_operand_a[63:0]
+@22
+[color] 1
+fpu_tb.operand_b[63:0]
+@c00028
+[color] 1
+fpu_tb.dut.current_operand_b[63:0]
+@28
+[color] 1
+(0)fpu_tb.dut.current_operand_b[63:0]
+[color] 1
+(1)fpu_tb.dut.current_operand_b[63:0]
+[color] 1
+(2)fpu_tb.dut.current_operand_b[63:0]
+[color] 1
+(3)fpu_tb.dut.current_operand_b[63:0]
+[color] 1
+(4)fpu_tb.dut.current_operand_b[63:0]
+[color] 1
+(5)fpu_tb.dut.current_operand_b[63:0]
+[color] 1
+(6)fpu_tb.dut.current_operand_b[63:0]
+[color] 1
+(7)fpu_tb.dut.current_operand_b[63:0]
+[color] 1
+(8)fpu_tb.dut.current_operand_b[63:0]
+[color] 1
+(9)fpu_tb.dut.current_operand_b[63:0]
+[color] 1
+(10)fpu_tb.dut.current_operand_b[63:0]
+[color] 1
+(11)fpu_tb.dut.current_operand_b[63:0]
+[color] 1
+(12)fpu_tb.dut.current_operand_b[63:0]
+[color] 1
+(13)fpu_tb.dut.current_operand_b[63:0]
+[color] 1
+(14)fpu_tb.dut.current_operand_b[63:0]
+[color] 1
+(15)fpu_tb.dut.current_operand_b[63:0]
+[color] 1
+(16)fpu_tb.dut.current_operand_b[63:0]
+[color] 1
+(17)fpu_tb.dut.current_operand_b[63:0]
+[color] 1
+(18)fpu_tb.dut.current_operand_b[63:0]
+[color] 1
+(19)fpu_tb.dut.current_operand_b[63:0]
+[color] 1
+(20)fpu_tb.dut.current_operand_b[63:0]
+[color] 1
+(21)fpu_tb.dut.current_operand_b[63:0]
+[color] 1
+(22)fpu_tb.dut.current_operand_b[63:0]
+[color] 1
+(23)fpu_tb.dut.current_operand_b[63:0]
+[color] 1
+(24)fpu_tb.dut.current_operand_b[63:0]
+[color] 1
+(25)fpu_tb.dut.current_operand_b[63:0]
+[color] 1
+(26)fpu_tb.dut.current_operand_b[63:0]
+[color] 1
+(27)fpu_tb.dut.current_operand_b[63:0]
+[color] 1
+(28)fpu_tb.dut.current_operand_b[63:0]
+[color] 1
+(29)fpu_tb.dut.current_operand_b[63:0]
+[color] 1
+(30)fpu_tb.dut.current_operand_b[63:0]
+[color] 1
+(31)fpu_tb.dut.current_operand_b[63:0]
+[color] 1
+(32)fpu_tb.dut.current_operand_b[63:0]
+[color] 1
+(33)fpu_tb.dut.current_operand_b[63:0]
+[color] 1
+(34)fpu_tb.dut.current_operand_b[63:0]
+[color] 1
+(35)fpu_tb.dut.current_operand_b[63:0]
+[color] 1
+(36)fpu_tb.dut.current_operand_b[63:0]
+[color] 1
+(37)fpu_tb.dut.current_operand_b[63:0]
+[color] 1
+(38)fpu_tb.dut.current_operand_b[63:0]
+[color] 1
+(39)fpu_tb.dut.current_operand_b[63:0]
+[color] 1
+(40)fpu_tb.dut.current_operand_b[63:0]
+[color] 1
+(41)fpu_tb.dut.current_operand_b[63:0]
+[color] 1
+(42)fpu_tb.dut.current_operand_b[63:0]
+[color] 1
+(43)fpu_tb.dut.current_operand_b[63:0]
+[color] 1
+(44)fpu_tb.dut.current_operand_b[63:0]
+[color] 1
+(45)fpu_tb.dut.current_operand_b[63:0]
+[color] 1
+(46)fpu_tb.dut.current_operand_b[63:0]
+[color] 1
+(47)fpu_tb.dut.current_operand_b[63:0]
+[color] 1
+(48)fpu_tb.dut.current_operand_b[63:0]
+[color] 1
+(49)fpu_tb.dut.current_operand_b[63:0]
+[color] 1
+(50)fpu_tb.dut.current_operand_b[63:0]
+[color] 1
+(51)fpu_tb.dut.current_operand_b[63:0]
+[color] 1
+(52)fpu_tb.dut.current_operand_b[63:0]
+[color] 1
+(53)fpu_tb.dut.current_operand_b[63:0]
+[color] 1
+(54)fpu_tb.dut.current_operand_b[63:0]
+[color] 1
+(55)fpu_tb.dut.current_operand_b[63:0]
+[color] 1
+(56)fpu_tb.dut.current_operand_b[63:0]
+[color] 1
+(57)fpu_tb.dut.current_operand_b[63:0]
+[color] 1
+(58)fpu_tb.dut.current_operand_b[63:0]
+[color] 1
+(59)fpu_tb.dut.current_operand_b[63:0]
+[color] 1
+(60)fpu_tb.dut.current_operand_b[63:0]
+[color] 1
+(61)fpu_tb.dut.current_operand_b[63:0]
+[color] 1
+(62)fpu_tb.dut.current_operand_b[63:0]
+[color] 1
+(63)fpu_tb.dut.current_operand_b[63:0]
+@1401200
+-group_end
+@c00022
+[color] 7
+fpu_tb.exceptions[4:0]
+@28
+(0)fpu_tb.exceptions[4:0]
+(1)fpu_tb.exceptions[4:0]
+(2)fpu_tb.exceptions[4:0]
+(3)fpu_tb.exceptions[4:0]
+(4)fpu_tb.exceptions[4:0]
+@1401200
+-group_end
+@28
+[color] 7
+fpu_tb.valid_out
+[color] 7
+fpu_tb.dut.core_valid_out
+@22
+fpu_tb.dut.core_result[68:0]
+@c40020
+fpu_tb.result[63:0]
+@28
+(0)fpu_tb.result[63:0]
+(1)fpu_tb.result[63:0]
+(2)fpu_tb.result[63:0]
+(3)fpu_tb.result[63:0]
+(4)fpu_tb.result[63:0]
+(5)fpu_tb.result[63:0]
+(6)fpu_tb.result[63:0]
+(7)fpu_tb.result[63:0]
+(8)fpu_tb.result[63:0]
+(9)fpu_tb.result[63:0]
+(10)fpu_tb.result[63:0]
+(11)fpu_tb.result[63:0]
+(12)fpu_tb.result[63:0]
+(13)fpu_tb.result[63:0]
+(14)fpu_tb.result[63:0]
+(15)fpu_tb.result[63:0]
+(16)fpu_tb.result[63:0]
+(17)fpu_tb.result[63:0]
+(18)fpu_tb.result[63:0]
+(19)fpu_tb.result[63:0]
+(20)fpu_tb.result[63:0]
+(21)fpu_tb.result[63:0]
+(22)fpu_tb.result[63:0]
+(23)fpu_tb.result[63:0]
+(24)fpu_tb.result[63:0]
+(25)fpu_tb.result[63:0]
+(26)fpu_tb.result[63:0]
+(27)fpu_tb.result[63:0]
+(28)fpu_tb.result[63:0]
+(29)fpu_tb.result[63:0]
+(30)fpu_tb.result[63:0]
+(31)fpu_tb.result[63:0]
+(32)fpu_tb.result[63:0]
+(33)fpu_tb.result[63:0]
+(34)fpu_tb.result[63:0]
+(35)fpu_tb.result[63:0]
+(36)fpu_tb.result[63:0]
+(37)fpu_tb.result[63:0]
+(38)fpu_tb.result[63:0]
+(39)fpu_tb.result[63:0]
+(40)fpu_tb.result[63:0]
+(41)fpu_tb.result[63:0]
+(42)fpu_tb.result[63:0]
+(43)fpu_tb.result[63:0]
+(44)fpu_tb.result[63:0]
+(45)fpu_tb.result[63:0]
+(46)fpu_tb.result[63:0]
+(47)fpu_tb.result[63:0]
+(48)fpu_tb.result[63:0]
+(49)fpu_tb.result[63:0]
+(50)fpu_tb.result[63:0]
+(51)fpu_tb.result[63:0]
+(52)fpu_tb.result[63:0]
+(53)fpu_tb.result[63:0]
+(54)fpu_tb.result[63:0]
+(55)fpu_tb.result[63:0]
+(56)fpu_tb.result[63:0]
+(57)fpu_tb.result[63:0]
+(58)fpu_tb.result[63:0]
+(59)fpu_tb.result[63:0]
+(60)fpu_tb.result[63:0]
+(61)fpu_tb.result[63:0]
+(62)fpu_tb.result[63:0]
+(63)fpu_tb.result[63:0]
+@1401200
+-group_end
+[pattern_trace] 1
+[pattern_trace] 0
