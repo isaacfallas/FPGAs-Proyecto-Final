@@ -6,6 +6,7 @@ RTL_SRCS := \
 	$(ROOT_DIR)/rtl/fpu_pkg.sv \
 	$(ROOT_DIR)/rtl/fp_unpack.sv \
 	$(ROOT_DIR)/rtl/fp_pack.sv \
+	$(ROOT_DIR)/rtl/fp_divider.sv \
 	$(ROOT_DIR)/rtl/fpu_core.sv \
 	$(ROOT_DIR)/rtl/fpu_top.sv
 
