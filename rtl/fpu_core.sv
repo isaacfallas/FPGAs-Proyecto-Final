@@ -5,7 +5,9 @@
 // No "sabe" cuál es la precisión original - eso lo maneja unpack/pack.
 // 
 // Operaciones: ADD, SUB, MUL, DIV
-// Latencia: 1 ciclo (combinacional con registro de salida)
+// Latencia:
+//   - ADD/SUB/MUL: 1 ciclo (combinacional + registro de salida)
+//   - DIV normal: multi-ciclo (iterativo con fp_divider)
 // ============================================================================
 
 module fpu_core
@@ -52,12 +54,17 @@ module fpu_core
     // Señales para DIV
     // ========================================================================
     
-    logic [106:0]        div_mant_dividend;
     logic [53:0]         div_mant_quotient;
     logic signed [12:0]  div_exp_diff;
     logic [10:0]         div_exp_result;
     logic [52:0]         div_mant_result;
     logic                div_sign_result;
+    logic                div_start;
+    logic                div_busy;
+    logic                div_done;
+    logic                div_is_special;
+
+    logic                out_fire;
 
     // ========================================================================
     // Resultado combinacional
@@ -82,6 +89,24 @@ module fpu_core
     endfunction
     
     logic [5:0] addsub_lzc;
+
+    // ========================================================================
+    // Iterative divider instance
+    // ========================================================================
+
+    assign div_is_special = a.is_nan || b.is_nan || a.is_inf || b.is_inf || a.is_zero || b.is_zero;
+    assign div_start      = valid_in && (op == OP_DIV) && !div_is_special && !div_busy;
+
+    fp_divider div_u (
+        .clk      (clk),
+        .rst_n    (rst_n),
+        .start    (div_start),
+        .busy     (div_busy),
+        .done     (div_done),
+        .mant_a   (a.mant),
+        .mant_b   (b.mant),
+        .quotient (div_mant_quotient)
+    );
 
     // ========================================================================
     // Signo efectivo de B (para SUB)
@@ -202,27 +227,12 @@ module fpu_core
     //   - a.mant tiene bit implícito en posición 52 (valor en [1, 2))
     //   - b.mant tiene bit implícito en posición 52 (valor en [1, 2))
     //
-    // Extendemos dividendo: {1'b0, a.mant, 53'b0} = 107 bits
-    //   El bit implícito de a queda en posición 52+53=105
-    //
-    // Divisor: {1'b0, b.mant} = 54 bits  
-    //   El bit implícito de b queda en posición 52
-    //
-    // Cociente: tiene el bit implícito en posición 105-52=53
+    // Cociente (de fp_divider): 54 bits
     //   Si a.mant >= b.mant: bit 53 está set (cociente en [1, 2))
     //   Si a.mant < b.mant: bit 53 clear, bit 52 set (cociente en [0.5, 1))
     // ========================================================================
     
     always_comb begin
-        // Extender dividendo
-        div_mant_dividend = {1'b0, a.mant, 53'b0};  // 107 bits, bit impl en pos 105
-        
-        // División
-        if (b.mant != 0)
-            div_mant_quotient = div_mant_dividend / {1'b0, b.mant};  // 54 bits
-        else
-            div_mant_quotient = 54'h3FFFFFFFFFFFFF;
-        
         // Exponente base: exp_a - exp_b + bias
         div_exp_diff = $signed({2'b0, a.exp}) - $signed({2'b0, b.exp}) + $signed(13'd1023);
         
@@ -369,6 +379,12 @@ module fpu_core
     end
 
     // ========================================================================
+    // Handshake de salida
+    // ========================================================================
+
+    assign out_fire = (valid_in && ((op != OP_DIV) || div_is_special)) || div_done;
+
+    // ========================================================================
     // Registro de salida
     // ========================================================================
     
@@ -378,9 +394,11 @@ module fpu_core
             result     <= '0;
             exceptions <= '0;
         end else begin
-            valid_out  <= valid_in;
-            result     <= result_comb;
-            exceptions <= exc_comb;
+            valid_out <= out_fire;
+            if (out_fire) begin
+                result     <= result_comb;
+                exceptions <= exc_comb;
+            end
         end
     end
 
