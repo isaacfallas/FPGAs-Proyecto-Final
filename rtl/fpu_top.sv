@@ -240,25 +240,60 @@ module fpu_top
                 end
             end
             
-            // FP64: PROC -> WAIT -> IDLE
+            // FP64: PROC -> WAIT (hasta core_valid_out) -> IDLE
             PROC_FP64:    next_state = WAIT_FP64;
-            WAIT_FP64:    next_state = IDLE;
+            WAIT_FP64: begin
+                if (core_valid_out)
+                    next_state = IDLE;
+                else
+                    next_state = WAIT_FP64;
+            end
             
-            // FP32: PROC_LO -> WAIT_LO -> PROC_HI -> WAIT_HI -> IDLE
+            // FP32: cada WAIT espera core_valid_out
             PROC_FP32_LO: next_state = WAIT_FP32_LO;
-            WAIT_FP32_LO: next_state = PROC_FP32_HI;
+            WAIT_FP32_LO: begin
+                if (core_valid_out)
+                    next_state = PROC_FP32_HI;
+                else
+                    next_state = WAIT_FP32_LO;
+            end
             PROC_FP32_HI: next_state = WAIT_FP32_HI;
-            WAIT_FP32_HI: next_state = IDLE;
+            WAIT_FP32_HI: begin
+                if (core_valid_out)
+                    next_state = IDLE;
+                else
+                    next_state = WAIT_FP32_HI;
+            end
             
-            // FP16: PROC_0 -> WAIT_0 -> PROC_1 -> WAIT_1 -> ... -> IDLE
+            // FP16: cada WAIT espera core_valid_out
             PROC_FP16_0:  next_state = WAIT_FP16_0;
-            WAIT_FP16_0:  next_state = PROC_FP16_1;
+            WAIT_FP16_0: begin
+                if (core_valid_out)
+                    next_state = PROC_FP16_1;
+                else
+                    next_state = WAIT_FP16_0;
+            end
             PROC_FP16_1:  next_state = WAIT_FP16_1;
-            WAIT_FP16_1:  next_state = PROC_FP16_2;
+            WAIT_FP16_1: begin
+                if (core_valid_out)
+                    next_state = PROC_FP16_2;
+                else
+                    next_state = WAIT_FP16_1;
+            end
             PROC_FP16_2:  next_state = WAIT_FP16_2;
-            WAIT_FP16_2:  next_state = PROC_FP16_3;
+            WAIT_FP16_2: begin
+                if (core_valid_out)
+                    next_state = PROC_FP16_3;
+                else
+                    next_state = WAIT_FP16_2;
+            end
             PROC_FP16_3:  next_state = WAIT_FP16_3;
-            WAIT_FP16_3:  next_state = IDLE;
+            WAIT_FP16_3: begin
+                if (core_valid_out)
+                    next_state = IDLE;
+                else
+                    next_state = WAIT_FP16_3;
+            end
             
             default: next_state = IDLE;
         endcase
@@ -297,41 +332,55 @@ module fpu_top
                 
                 // on WAIT_* states we capture the results
                 WAIT_FP64: begin
-                    result_reg     <= packed_result;
-                    exceptions_reg <= core_exceptions;
-                    valid_out      <= 1'b1;
+                    if (core_valid_out) begin
+                        result_reg     <= packed_result;
+                        exceptions_reg <= core_exceptions;
+                        valid_out      <= 1'b1;
+                    end
                 end
                 
                 WAIT_FP32_LO: begin
-                    result_reg[31:0] <= packed_result[31:0];
-                    exceptions_reg   <= exceptions_reg | core_exceptions;
+                    if (core_valid_out) begin
+                        result_reg[31:0] <= packed_result[31:0];
+                        exceptions_reg   <= exceptions_reg | core_exceptions;
+                    end
                 end
                 
                 WAIT_FP32_HI: begin
-                    result_reg[63:32] <= packed_result[31:0];
-                    exceptions_reg    <= exceptions_reg | core_exceptions;
-                    valid_out         <= 1'b1;
+                    if (core_valid_out) begin
+                        result_reg[63:32] <= packed_result[31:0];
+                        exceptions_reg    <= exceptions_reg | core_exceptions;
+                        valid_out         <= 1'b1;
+                    end
                 end
                 
                 WAIT_FP16_0: begin
-                    result_reg[15:0] <= packed_result[15:0];
-                    exceptions_reg   <= exceptions_reg | core_exceptions;
+                    if (core_valid_out) begin
+                        result_reg[15:0] <= packed_result[15:0];
+                        exceptions_reg   <= exceptions_reg | core_exceptions;
+                    end
                 end
                 
                 WAIT_FP16_1: begin
-                    result_reg[31:16] <= packed_result[15:0];
-                    exceptions_reg    <= exceptions_reg | core_exceptions;
+                    if (core_valid_out) begin
+                        result_reg[31:16] <= packed_result[15:0];
+                        exceptions_reg    <= exceptions_reg | core_exceptions;
+                    end
                 end
                 
                 WAIT_FP16_2: begin
-                    result_reg[47:32] <= packed_result[15:0];
-                    exceptions_reg    <= exceptions_reg | core_exceptions;
+                    if (core_valid_out) begin
+                        result_reg[47:32] <= packed_result[15:0];
+                        exceptions_reg    <= exceptions_reg | core_exceptions;
+                    end
                 end
                 
                 WAIT_FP16_3: begin
-                    result_reg[63:48] <= packed_result[15:0];
-                    exceptions_reg    <= exceptions_reg | core_exceptions;
-                    valid_out         <= 1'b1;
+                    if (core_valid_out) begin
+                        result_reg[63:48] <= packed_result[15:0];
+                        exceptions_reg    <= exceptions_reg | core_exceptions;
+                        valid_out         <= 1'b1;
+                    end
                 end
                 
                 default: begin
