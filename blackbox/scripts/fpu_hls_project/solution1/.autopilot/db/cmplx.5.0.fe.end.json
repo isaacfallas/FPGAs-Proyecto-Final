@@ -1,0 +1,11 @@
+{
+    "0": {
+        "name": "fpu_top",
+        "file": "fpu_stub.cpp",
+        "fileloc": "6",
+        "instructions": "39",
+        "total_instructions": "39",
+        "calls": "",
+        "basicblocks": "1"
+    }
+}

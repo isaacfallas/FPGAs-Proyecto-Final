@@ -1,0 +1,845 @@
+{
+  "Top": "fpu_top",
+  "RtlTop": "fpu_top",
+  "RtlPrefix": "",
+  "RtlSubPrefix": "fpu_top_",
+  "SourceLanguage": "cpp",
+  "HostMachineBits": "64",
+  "FunctionProtocol": "ap_ctrl_none",
+  "ResetStyle": "control",
+  "Target": {
+    "Family": "zynquplus",
+    "Device": "xck26",
+    "Package": "-sfvc784",
+    "Speed": "-2LV-c",
+    "Triple": "fpga64-xilinx-none"
+  },
+  "Args": {
+    "clk": {
+      "index": "0",
+      "direction": "in",
+      "srcType": "bool",
+      "srcSize": "1",
+      "hwRefs": [{
+          "type": "register",
+          "interface": "s_axi_control",
+          "name": "clk",
+          "usage": "data",
+          "direction": "in"
+        }]
+    },
+    "rst_n": {
+      "index": "1",
+      "direction": "in",
+      "srcType": "bool",
+      "srcSize": "1",
+      "hwRefs": [{
+          "type": "register",
+          "interface": "s_axi_control",
+          "name": "rst_n",
+          "usage": "data",
+          "direction": "in"
+        }]
+    },
+    "ce": {
+      "index": "2",
+      "direction": "in",
+      "srcType": "bool",
+      "srcSize": "1",
+      "hwRefs": [{
+          "type": "register",
+          "interface": "s_axi_control",
+          "name": "ce_r",
+          "usage": "data",
+          "direction": "in"
+        }]
+    },
+    "valid_in": {
+      "index": "3",
+      "direction": "in",
+      "srcType": "bool",
+      "srcSize": "1",
+      "hwRefs": [{
+          "type": "register",
+          "interface": "s_axi_control",
+          "name": "valid_in",
+          "usage": "data",
+          "direction": "in"
+        }]
+    },
+    "precision": {
+      "index": "4",
+      "direction": "in",
+      "srcType": "ap_uint<2>",
+      "srcSize": "8",
+      "hwRefs": [{
+          "type": "register",
+          "interface": "s_axi_control",
+          "name": "precision",
+          "usage": "data",
+          "direction": "in"
+        }]
+    },
+    "op": {
+      "index": "5",
+      "direction": "in",
+      "srcType": "ap_uint<2>",
+      "srcSize": "8",
+      "hwRefs": [{
+          "type": "register",
+          "interface": "s_axi_control",
+          "name": "op",
+          "usage": "data",
+          "direction": "in"
+        }]
+    },
+    "operand_a": {
+      "index": "6",
+      "direction": "in",
+      "srcType": "ap_uint<64>",
+      "srcSize": "64",
+      "hwRefs": [
+        {
+          "type": "register",
+          "interface": "s_axi_control",
+          "name": "operand_a_1",
+          "usage": "data",
+          "direction": "in"
+        },
+        {
+          "type": "register",
+          "interface": "s_axi_control",
+          "name": "operand_a_2",
+          "usage": "data",
+          "direction": "in"
+        }
+      ]
+    },
+    "operand_b": {
+      "index": "7",
+      "direction": "in",
+      "srcType": "ap_uint<64>",
+      "srcSize": "64",
+      "hwRefs": [
+        {
+          "type": "register",
+          "interface": "s_axi_control",
+          "name": "operand_b_1",
+          "usage": "data",
+          "direction": "in"
+        },
+        {
+          "type": "register",
+          "interface": "s_axi_control",
+          "name": "operand_b_2",
+          "usage": "data",
+          "direction": "in"
+        }
+      ]
+    },
+    "valid_out": {
+      "index": "8",
+      "direction": "unused",
+      "srcType": "bool&",
+      "srcSize": "1",
+      "hwRefs": [{
+          "type": "register",
+          "interface": "s_axi_control",
+          "name": "valid_out",
+          "usage": "data",
+          "direction": "in"
+        }]
+    },
+    "precision_out": {
+      "index": "9",
+      "direction": "unused",
+      "srcType": "ap_uint<2>&",
+      "srcSize": "8",
+      "hwRefs": [{
+          "type": "register",
+          "interface": "s_axi_control",
+          "name": "precision_out",
+          "usage": "data",
+          "direction": "in"
+        }]
+    },
+    "result": {
+      "index": "10",
+      "direction": "unused",
+      "srcType": "ap_uint<64>&",
+      "srcSize": "64",
+      "hwRefs": [
+        {
+          "type": "register",
+          "interface": "s_axi_control",
+          "name": "result_1",
+          "usage": "data",
+          "direction": "in"
+        },
+        {
+          "type": "register",
+          "interface": "s_axi_control",
+          "name": "result_2",
+          "usage": "data",
+          "direction": "in"
+        }
+      ]
+    },
+    "exceptions": {
+      "index": "11",
+      "direction": "unused",
+      "srcType": "ap_uint<5>&",
+      "srcSize": "8",
+      "hwRefs": [{
+          "type": "register",
+          "interface": "s_axi_control",
+          "name": "exceptions",
+          "usage": "data",
+          "direction": "in"
+        }]
+    }
+  },
+  "HlsSolution": {
+    "FlowTarget": "vitis",
+    "ConfigTcl": [
+      "config_interface -m_axi_latency=64",
+      "config_interface -m_axi_alignment_byte_size=64",
+      "config_interface -m_axi_max_widen_bitwidth=512",
+      "config_interface -default_interface=kernel",
+      "config_rtl -register_reset_num=3",
+      "config_export -format=ip_catalog",
+      "config_export -output=fpu_ip.zip"
+    ],
+    "ProfileOption": "0",
+    "ProfileType": "none",
+    "KernelName": "fpu_top"
+  },
+  "ClockInfo": {
+    "ClockName": "ap_clk",
+    "ClockPeriod": "20",
+    "Uncertainty": "5.4",
+    "IsCombinational": "1",
+    "II": "1",
+    "Latency": "0"
+  },
+  "Xdc": {
+    
+  },
+  "Ipx": {
+    "Vendor": "xilinx.com",
+    "Library": "hls",
+    "Name": "fpu_top",
+    "Version": "1.0",
+    "DisplayName": "Fpu_top",
+    "Revision": "2114578209",
+    "Description": "An IP generated by Vitis HLS",
+    "Taxonomy": "\/VITIS_HLS_IP",
+    "AutoFamilySupport": "",
+    "ZipFile": "xilinx_com_hls_fpu_top_1_0.zip"
+  },
+  "Files": {
+    "CSource": [
+      "..\/..\/..\/src\/fpu_stub.cpp",
+      "..\/..\/..\/src\/fpu_pkg.sv",
+      "..\/..\/..\/src\/fpu_top.sv",
+      "..\/..\/..\/src\/fpu_core.sv",
+      "..\/..\/..\/src\/fp_divider.sv",
+      "..\/..\/..\/src\/fp_pack.sv",
+      "..\/..\/..\/src\/fp_unpack.sv"
+    ],
+    "TestBench": [
+      "..\/..\/..\/tb\/fpu_tb.sv",
+      "..\/..\/..\/tb\/dummy_tb.cpp"
+    ],
+    "Vhdl": [
+      "impl\/vhdl\/fpu_top_control_s_axi.vhd",
+      "impl\/vhdl\/fpu_top.vhd"
+    ],
+    "Verilog": [
+      "impl\/verilog\/fpu_top_control_s_axi.v",
+      "impl\/verilog\/fpu_top.v"
+    ],
+    "SwDriver": [
+      "impl\/misc\/drivers\/fpu_top_v1_0\/data\/fpu_top.mdd",
+      "impl\/misc\/drivers\/fpu_top_v1_0\/data\/fpu_top.tcl",
+      "impl\/misc\/drivers\/fpu_top_v1_0\/data\/fpu_top.yaml",
+      "impl\/misc\/drivers\/fpu_top_v1_0\/src\/CMakeLists.txt",
+      "impl\/misc\/drivers\/fpu_top_v1_0\/src\/Makefile",
+      "impl\/misc\/drivers\/fpu_top_v1_0\/src\/xfpu_top.c",
+      "impl\/misc\/drivers\/fpu_top_v1_0\/src\/xfpu_top.h",
+      "impl\/misc\/drivers\/fpu_top_v1_0\/src\/xfpu_top_hw.h",
+      "impl\/misc\/drivers\/fpu_top_v1_0\/src\/xfpu_top_linux.c",
+      "impl\/misc\/drivers\/fpu_top_v1_0\/src\/xfpu_top_sinit.c"
+    ],
+    "IpMisc": ["impl\/misc\/logo.png"],
+    "CsynthXml": "syn\/report\/csynth.xml",
+    "DebugDir": ".debug",
+    "KernelXml": "..\/kernel.xml",
+    "Xo": "",
+    "XoHlsDir": "",
+    "ProtoInst": [".debug\/fpu_top.protoinst"]
+  },
+  "SubcoreInfo": {
+    "HasXpmMemory": false,
+    "HasClockedDsp": false,
+    "Ip": []
+  },
+  "Interfaces": {
+    "s_axi_control": {
+      "type": "axi4lite",
+      "busTypeName": "aximm",
+      "mode": "slave",
+      "dataWidth": "32",
+      "addrWidth": "7",
+      "portPrefix": "s_axi_control_",
+      "paramPrefix": "C_S_AXI_CONTROL_",
+      "ports": [
+        "s_axi_control_ARADDR",
+        "s_axi_control_ARREADY",
+        "s_axi_control_ARVALID",
+        "s_axi_control_AWADDR",
+        "s_axi_control_AWREADY",
+        "s_axi_control_AWVALID",
+        "s_axi_control_BREADY",
+        "s_axi_control_BRESP",
+        "s_axi_control_BVALID",
+        "s_axi_control_RDATA",
+        "s_axi_control_RREADY",
+        "s_axi_control_RRESP",
+        "s_axi_control_RVALID",
+        "s_axi_control_WDATA",
+        "s_axi_control_WREADY",
+        "s_axi_control_WSTRB",
+        "s_axi_control_WVALID"
+      ],
+      "registers": [
+        {
+          "offset": "0x10",
+          "name": "clk",
+          "access": "W",
+          "description": "Data signal of clk",
+          "range": "32",
+          "fields": [
+            {
+              "offset": "0",
+              "width": "1",
+              "name": "clk",
+              "access": "W",
+              "description": "Bit 0 to 0 of clk"
+            },
+            {
+              "offset": "1",
+              "width": "31",
+              "name": "RESERVED",
+              "access": "R",
+              "description": "Reserved.  0s on read."
+            }
+          ]
+        },
+        {
+          "offset": "0x18",
+          "name": "rst_n",
+          "access": "W",
+          "description": "Data signal of rst_n",
+          "range": "32",
+          "fields": [
+            {
+              "offset": "0",
+              "width": "1",
+              "name": "rst_n",
+              "access": "W",
+              "description": "Bit 0 to 0 of rst_n"
+            },
+            {
+              "offset": "1",
+              "width": "31",
+              "name": "RESERVED",
+              "access": "R",
+              "description": "Reserved.  0s on read."
+            }
+          ]
+        },
+        {
+          "offset": "0x20",
+          "name": "ce_r",
+          "access": "W",
+          "description": "Data signal of ce_r",
+          "range": "32",
+          "fields": [
+            {
+              "offset": "0",
+              "width": "1",
+              "name": "ce_r",
+              "access": "W",
+              "description": "Bit 0 to 0 of ce_r"
+            },
+            {
+              "offset": "1",
+              "width": "31",
+              "name": "RESERVED",
+              "access": "R",
+              "description": "Reserved.  0s on read."
+            }
+          ]
+        },
+        {
+          "offset": "0x28",
+          "name": "valid_in",
+          "access": "W",
+          "description": "Data signal of valid_in",
+          "range": "32",
+          "fields": [
+            {
+              "offset": "0",
+              "width": "1",
+              "name": "valid_in",
+              "access": "W",
+              "description": "Bit 0 to 0 of valid_in"
+            },
+            {
+              "offset": "1",
+              "width": "31",
+              "name": "RESERVED",
+              "access": "R",
+              "description": "Reserved.  0s on read."
+            }
+          ]
+        },
+        {
+          "offset": "0x30",
+          "name": "precision",
+          "access": "W",
+          "description": "Data signal of precision",
+          "range": "32",
+          "fields": [
+            {
+              "offset": "0",
+              "width": "2",
+              "name": "precision",
+              "access": "W",
+              "description": "Bit 1 to 0 of precision"
+            },
+            {
+              "offset": "2",
+              "width": "30",
+              "name": "RESERVED",
+              "access": "R",
+              "description": "Reserved.  0s on read."
+            }
+          ]
+        },
+        {
+          "offset": "0x38",
+          "name": "op",
+          "access": "W",
+          "description": "Data signal of op",
+          "range": "32",
+          "fields": [
+            {
+              "offset": "0",
+              "width": "2",
+              "name": "op",
+              "access": "W",
+              "description": "Bit 1 to 0 of op"
+            },
+            {
+              "offset": "2",
+              "width": "30",
+              "name": "RESERVED",
+              "access": "R",
+              "description": "Reserved.  0s on read."
+            }
+          ]
+        },
+        {
+          "offset": "0x40",
+          "name": "operand_a_1",
+          "access": "W",
+          "description": "Data signal of operand_a",
+          "range": "32",
+          "fields": [{
+              "offset": "0",
+              "width": "32",
+              "name": "operand_a",
+              "access": "W",
+              "description": "Bit 31 to 0 of operand_a"
+            }]
+        },
+        {
+          "offset": "0x44",
+          "name": "operand_a_2",
+          "access": "W",
+          "description": "Data signal of operand_a",
+          "range": "32",
+          "fields": [{
+              "offset": "0",
+              "width": "32",
+              "name": "operand_a",
+              "access": "W",
+              "description": "Bit 63 to 32 of operand_a"
+            }]
+        },
+        {
+          "offset": "0x4c",
+          "name": "operand_b_1",
+          "access": "W",
+          "description": "Data signal of operand_b",
+          "range": "32",
+          "fields": [{
+              "offset": "0",
+              "width": "32",
+              "name": "operand_b",
+              "access": "W",
+              "description": "Bit 31 to 0 of operand_b"
+            }]
+        },
+        {
+          "offset": "0x50",
+          "name": "operand_b_2",
+          "access": "W",
+          "description": "Data signal of operand_b",
+          "range": "32",
+          "fields": [{
+              "offset": "0",
+              "width": "32",
+              "name": "operand_b",
+              "access": "W",
+              "description": "Bit 63 to 32 of operand_b"
+            }]
+        },
+        {
+          "offset": "0x58",
+          "name": "valid_out",
+          "access": "W",
+          "description": "Data signal of valid_out",
+          "range": "32",
+          "fields": [
+            {
+              "offset": "0",
+              "width": "1",
+              "name": "valid_out",
+              "access": "W",
+              "description": "Bit 0 to 0 of valid_out"
+            },
+            {
+              "offset": "1",
+              "width": "31",
+              "name": "RESERVED",
+              "access": "R",
+              "description": "Reserved.  0s on read."
+            }
+          ]
+        },
+        {
+          "offset": "0x60",
+          "name": "precision_out",
+          "access": "W",
+          "description": "Data signal of precision_out",
+          "range": "32",
+          "fields": [
+            {
+              "offset": "0",
+              "width": "2",
+              "name": "precision_out",
+              "access": "W",
+              "description": "Bit 1 to 0 of precision_out"
+            },
+            {
+              "offset": "2",
+              "width": "30",
+              "name": "RESERVED",
+              "access": "R",
+              "description": "Reserved.  0s on read."
+            }
+          ]
+        },
+        {
+          "offset": "0x68",
+          "name": "result_1",
+          "access": "W",
+          "description": "Data signal of result",
+          "range": "32",
+          "fields": [{
+              "offset": "0",
+              "width": "32",
+              "name": "result",
+              "access": "W",
+              "description": "Bit 31 to 0 of result"
+            }]
+        },
+        {
+          "offset": "0x6c",
+          "name": "result_2",
+          "access": "W",
+          "description": "Data signal of result",
+          "range": "32",
+          "fields": [{
+              "offset": "0",
+              "width": "32",
+              "name": "result",
+              "access": "W",
+              "description": "Bit 63 to 32 of result"
+            }]
+        },
+        {
+          "offset": "0x74",
+          "name": "exceptions",
+          "access": "W",
+          "description": "Data signal of exceptions",
+          "range": "32",
+          "fields": [
+            {
+              "offset": "0",
+              "width": "5",
+              "name": "exceptions",
+              "access": "W",
+              "description": "Bit 4 to 0 of exceptions"
+            },
+            {
+              "offset": "5",
+              "width": "27",
+              "name": "RESERVED",
+              "access": "R",
+              "description": "Reserved.  0s on read."
+            }
+          ]
+        }
+      ],
+      "constraints": [
+        {
+          "constraint_type": "pragma interface",
+          "mode": "s_axilite",
+          "register_option": "0",
+          "offset": "16",
+          "argName": "clk"
+        },
+        {
+          "constraint_type": "pragma interface",
+          "mode": "s_axilite",
+          "register_option": "0",
+          "offset": "24",
+          "argName": "rst_n"
+        },
+        {
+          "constraint_type": "pragma interface",
+          "mode": "s_axilite",
+          "register_option": "0",
+          "offset": "32",
+          "argName": "ce"
+        },
+        {
+          "constraint_type": "pragma interface",
+          "mode": "s_axilite",
+          "register_option": "0",
+          "offset": "40",
+          "argName": "valid_in"
+        },
+        {
+          "constraint_type": "pragma interface",
+          "mode": "s_axilite",
+          "register_option": "0",
+          "offset": "48",
+          "argName": "precision"
+        },
+        {
+          "constraint_type": "pragma interface",
+          "mode": "s_axilite",
+          "register_option": "0",
+          "offset": "56",
+          "argName": "op"
+        },
+        {
+          "constraint_type": "pragma interface",
+          "mode": "s_axilite",
+          "register_option": "0",
+          "offset": "64",
+          "argName": "operand_a"
+        },
+        {
+          "constraint_type": "pragma interface",
+          "mode": "s_axilite",
+          "register_option": "0",
+          "offset": "76",
+          "argName": "operand_b"
+        },
+        {
+          "constraint_type": "pragma interface",
+          "mode": "s_axilite",
+          "register_option": "0",
+          "offset": "88",
+          "argName": "valid_out"
+        },
+        {
+          "constraint_type": "pragma interface",
+          "mode": "s_axilite",
+          "register_option": "0",
+          "offset": "96",
+          "argName": "precision_out"
+        },
+        {
+          "constraint_type": "pragma interface",
+          "mode": "s_axilite",
+          "register_option": "0",
+          "offset": "104",
+          "argName": "result"
+        },
+        {
+          "constraint_type": "pragma interface",
+          "mode": "s_axilite",
+          "register_option": "0",
+          "offset": "116",
+          "argName": "exceptions"
+        }
+      ]
+    },
+    "ap_clk": {
+      "type": "clock",
+      "busTypeName": "clock",
+      "mode": "slave",
+      "busParams": {
+        "ASSOCIATED_BUSIF": "s_axi_control",
+        "ASSOCIATED_RESET": "ap_rst_n"
+      },
+      "portMap": {"ap_clk": "CLK"},
+      "ports": ["ap_clk"]
+    },
+    "ap_rst_n": {
+      "type": "reset",
+      "busTypeName": "reset",
+      "mode": "slave",
+      "busParams": {"POLARITY": "ACTIVE_LOW"},
+      "portMap": {"ap_rst_n": "RST"},
+      "ports": ["ap_rst_n"]
+    }
+  },
+  "RtlPorts": {
+    "s_axi_control_AWVALID": {
+      "dir": "in",
+      "width": "1"
+    },
+    "s_axi_control_AWREADY": {
+      "dir": "out",
+      "width": "1"
+    },
+    "s_axi_control_AWADDR": {
+      "dir": "in",
+      "width": "7"
+    },
+    "s_axi_control_WVALID": {
+      "dir": "in",
+      "width": "1"
+    },
+    "s_axi_control_WREADY": {
+      "dir": "out",
+      "width": "1"
+    },
+    "s_axi_control_WDATA": {
+      "dir": "in",
+      "width": "32"
+    },
+    "s_axi_control_WSTRB": {
+      "dir": "in",
+      "width": "4"
+    },
+    "s_axi_control_ARVALID": {
+      "dir": "in",
+      "width": "1"
+    },
+    "s_axi_control_ARREADY": {
+      "dir": "out",
+      "width": "1"
+    },
+    "s_axi_control_ARADDR": {
+      "dir": "in",
+      "width": "7"
+    },
+    "s_axi_control_RVALID": {
+      "dir": "out",
+      "width": "1"
+    },
+    "s_axi_control_RREADY": {
+      "dir": "in",
+      "width": "1"
+    },
+    "s_axi_control_RDATA": {
+      "dir": "out",
+      "width": "32"
+    },
+    "s_axi_control_RRESP": {
+      "dir": "out",
+      "width": "2"
+    },
+    "s_axi_control_BVALID": {
+      "dir": "out",
+      "width": "1"
+    },
+    "s_axi_control_BREADY": {
+      "dir": "in",
+      "width": "1"
+    },
+    "s_axi_control_BRESP": {
+      "dir": "out",
+      "width": "2"
+    },
+    "ap_clk": {
+      "dir": "in",
+      "width": "1"
+    },
+    "ap_rst_n": {
+      "dir": "in",
+      "width": "1"
+    }
+  },
+  "ModuleInfo": {
+    "Hierarchy": {
+      "ModuleName": "fpu_top",
+      "BindInstances": "control_s_axi_U"
+    },
+    "Info": {"fpu_top": {
+        "FunctionProtocol": "ap_ctrl_none",
+        "isTaskLevelControl": "0",
+        "isPipelined": "0",
+        "isCombinational": "1",
+        "isOneStateSeq": "0"
+      }},
+    "Metrics": {"fpu_top": {
+        "Latency": {
+          "LatencyBest": "0",
+          "LatencyAvg": "0",
+          "LatencyWorst": "0",
+          "PipelineII": "1",
+          "PipelineDepth": "",
+          "PipelineType": "no"
+        },
+        "Timing": {
+          "Target": "20.00",
+          "Uncertainty": "5.40",
+          "Estimate": "0.000"
+        },
+        "Area": {
+          "BRAM_18K": "0",
+          "AVAIL_BRAM": "288",
+          "UTIL_BRAM": "0",
+          "FF": "313",
+          "AVAIL_FF": "234240",
+          "UTIL_FF": "~0",
+          "LUT": "456",
+          "AVAIL_LUT": "117120",
+          "UTIL_LUT": "~0",
+          "URAM": "0",
+          "AVAIL_URAM": "64",
+          "UTIL_URAM": "0",
+          "DSP": "0",
+          "AVAIL_DSP": "1248",
+          "UTIL_DSP": "0"
+        }
+      }}
+  },
+  "GenerateBdFiles": "0",
+  "GenData": {
+    "DataVersion": "0.2",
+    "Time": "2026-04-23 12:09:41 -0600",
+    "ToolName": "vitis_hls",
+    "ToolVersion": "2024.1"
+  }
+}

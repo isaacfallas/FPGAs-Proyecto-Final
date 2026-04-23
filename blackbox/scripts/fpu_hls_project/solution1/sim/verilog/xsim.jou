@@ -1,0 +1,26 @@
+#-----------------------------------------------------------
+# xsim v2024.1 (64-bit)
+# SW Build 5076996 on Wed May 22 18:37:14 MDT 2024
+# IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
+# SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
+# Start of session at: Thu Apr 23 12:09:35 2026
+# Process ID: 34932
+# Current directory: C:/Users/umbre/Downloads/FPGAs-Proyecto-Final/blackbox/scripts/fpu_hls_project/solution1/sim/verilog
+# Command line: xsim.exe -mode tcl -source {xsim.dir/fpu_top/xsim_script.tcl}
+# Log file: C:/Users/umbre/Downloads/FPGAs-Proyecto-Final/blackbox/scripts/fpu_hls_project/solution1/sim/verilog/xsim.log
+# Journal file: C:/Users/umbre/Downloads/FPGAs-Proyecto-Final/blackbox/scripts/fpu_hls_project/solution1/sim/verilog\xsim.jou
+# Running On        :Caverna
+# Platform          :Windows Server 2016 or Windows 10
+# Operating System  :26200
+# Processor Detail  :Intel(R) Core(TM) Ultra 7 255H
+# CPU Frequency     :3686 MHz
+# CPU Physical cores:16
+# CPU Logical cores :16
+# Host memory       :42303 MB
+# Swap memory       :6442 MB
+# Total Virtual     :48746 MB
+# Available Virtual :18804 MB
+#-----------------------------------------------------------
+source xsim.dir/fpu_top/xsim_script.tcl
+open_wave_config fpu_top_dataflow_ana.wcfg
+source fpu_top.tcl

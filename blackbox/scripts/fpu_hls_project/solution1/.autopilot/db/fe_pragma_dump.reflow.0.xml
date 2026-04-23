@@ -1,0 +1,11 @@
+<pragmas>
+<pragma file="../src/fpu_stub.cpp" line="21" pragmaType="interface" parentfunction="fpu_top" mode="ap_ctrl_none" port="return" name=""/>
+<pragma file="../src/fpu_stub.cpp" line="24" pragmaType="interface" parentfunction="fpu_top" mode="s_axilite" port="precision" bundle="" offset="-1" name="" clock="" impl="" register="0"/>
+<pragma file="../src/fpu_stub.cpp" line="25" pragmaType="interface" parentfunction="fpu_top" mode="s_axilite" port="op" bundle="" offset="-1" name="" clock="" impl="" register="0"/>
+<pragma file="../src/fpu_stub.cpp" line="26" pragmaType="interface" parentfunction="fpu_top" mode="s_axilite" port="operand_a" bundle="" offset="-1" name="" clock="" impl="" register="0"/>
+<pragma file="../src/fpu_stub.cpp" line="27" pragmaType="interface" parentfunction="fpu_top" mode="s_axilite" port="operand_b" bundle="" offset="-1" name="" clock="" impl="" register="0"/>
+<pragma file="../src/fpu_stub.cpp" line="30" pragmaType="interface" parentfunction="fpu_top" mode="ap_none" port="valid_out" name="" register="0"/>
+<pragma file="../src/fpu_stub.cpp" line="31" pragmaType="interface" parentfunction="fpu_top" mode="ap_none" port="precision_out" name="" register="0"/>
+<pragma file="../src/fpu_stub.cpp" line="32" pragmaType="interface" parentfunction="fpu_top" mode="ap_none" port="result" name="" register="0"/>
+<pragma file="../src/fpu_stub.cpp" line="33" pragmaType="interface" parentfunction="fpu_top" mode="ap_none" port="exceptions" name="" register="0"/>
+</pragmas>

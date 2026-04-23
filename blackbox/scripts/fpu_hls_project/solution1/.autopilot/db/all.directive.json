@@ -1,0 +1,23 @@
+[
+  {
+    "functionLabel": "",
+    "functionName": "fpu_top",
+    "id": 0,
+    "ifcond": "",
+    "insert_position": "",
+    "label": "",
+    "pragma": {
+      "name": "TOP",
+      "option": [
+        {
+          "name": "name",
+          "value": "fpu_top"
+        }
+      ]
+    },
+    "slx": false,
+    "sourceFile": "C:/Users/umbre/Downloads/FPGAs-Proyecto-Final/blackbox/scripts/run_cosim.tcl",
+    "sourceLine": 33,
+    "success": true
+  }
+]

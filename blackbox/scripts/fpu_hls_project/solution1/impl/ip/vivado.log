@@ -1,0 +1,39 @@
+#-----------------------------------------------------------
+# Vivado v2024.1 (64-bit)
+# SW Build 5076996 on Wed May 22 18:37:14 MDT 2024
+# IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
+# SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
+# Start of session at: Thu Apr 23 12:09:43 2026
+# Process ID: 27960
+# Current directory: C:/Users/umbre/Downloads/FPGAs-Proyecto-Final/blackbox/scripts/fpu_hls_project/solution1/impl/ip
+# Command line: vivado.exe -notrace -mode batch -source run_ippack.tcl
+# Log file: C:/Users/umbre/Downloads/FPGAs-Proyecto-Final/blackbox/scripts/fpu_hls_project/solution1/impl/ip/vivado.log
+# Journal file: C:/Users/umbre/Downloads/FPGAs-Proyecto-Final/blackbox/scripts/fpu_hls_project/solution1/impl/ip\vivado.jou
+# Running On        :Caverna
+# Platform          :Windows Server 2016 or Windows 10
+# Operating System  :26200
+# Processor Detail  :Intel(R) Core(TM) Ultra 7 255H
+# CPU Frequency     :3686 MHz
+# CPU Physical cores:16
+# CPU Logical cores :16
+# Host memory       :42303 MB
+# Swap memory       :6442 MB
+# Total Virtual     :48746 MB
+# Available Virtual :18795 MB
+#-----------------------------------------------------------
+source run_ippack.tcl -notrace
+INFO: calling package_hls_ip ip_types=vitis sysgen json_file=C:/Users/umbre/Downloads/FPGAs-Proyecto-Final/blackbox/scripts/fpu_hls_project/solution1/solution1_data.json outdir=C:/Users/umbre/Downloads/FPGAs-Proyecto-Final/blackbox/scripts/fpu_hls_project/solution1/impl/ip srcdir=C:/Users/umbre/Downloads/FPGAs-Proyecto-Final/blackbox/scripts/fpu_hls_project/solution1 sort_interfaces_ports=false
+INFO: Copied 1 ipmisc file(s) to C:/Users/umbre/Downloads/FPGAs-Proyecto-Final/blackbox/scripts/fpu_hls_project/solution1/impl/ip/misc
+INFO: Copied 2 verilog file(s) to C:/Users/umbre/Downloads/FPGAs-Proyecto-Final/blackbox/scripts/fpu_hls_project/solution1/impl/ip/hdl/verilog
+INFO: Copied 2 vhdl file(s) to C:/Users/umbre/Downloads/FPGAs-Proyecto-Final/blackbox/scripts/fpu_hls_project/solution1/impl/ip/hdl/vhdl
+INFO: Copied 10 swdriver file(s) to C:/Users/umbre/Downloads/FPGAs-Proyecto-Final/blackbox/scripts/fpu_hls_project/solution1/impl/ip/drivers
+INFO: Import ports from HDL: C:/Users/umbre/Downloads/FPGAs-Proyecto-Final/blackbox/scripts/fpu_hls_project/solution1/impl/ip/hdl/vhdl/fpu_top.vhd (fpu_top)
+INFO: Add axi4lite interface s_axi_control
+INFO: Add clock interface ap_clk
+INFO: Add reset interface ap_rst_n
+INFO: Calling post_process_vitis to specialize IP
+INFO: Calling post_process_sysgen to specialize IP
+Generating sysgen info xml from json file
+INFO: Created IP C:/Users/umbre/Downloads/FPGAs-Proyecto-Final/blackbox/scripts/fpu_hls_project/solution1/impl/ip/component.xml
+INFO: Created IP archive C:/Users/umbre/Downloads/FPGAs-Proyecto-Final/blackbox/scripts/fpu_hls_project/solution1/impl/ip/xilinx_com_hls_fpu_top_1_0.zip
+INFO: [Common 17-206] Exiting Vivado at Thu Apr 23 12:09:48 2026...

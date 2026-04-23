@@ -1,0 +1,17 @@
+{
+  "module_name": "fpu_top",
+  "interface": [
+    {"name": "clk",           "direction": "input",  "type": "clock", "width": 1},
+    {"name": "rst_n",         "direction": "input",  "type": "reset", "width": 1},
+    {"name": "ce",            "direction": "input",  "type": "data",  "width": 1},
+    {"name": "valid_in",      "direction": "input",  "type": "data",  "width": 1},
+    {"name": "precision",     "direction": "input",  "type": "data",  "width": 2},
+    {"name": "op",            "direction": "input",  "type": "data",  "width": 2},
+    {"name": "operand_a",     "direction": "input",  "type": "data",  "width": 64},
+    {"name": "operand_b",     "direction": "input",  "type": "data",  "width": 64},
+    {"name": "valid_out",     "direction": "output", "type": "data",  "width": 1},
+    {"name": "precision_out", "direction": "output", "type": "data",  "width": 2},
+    {"name": "result",        "direction": "output", "type": "data",  "width": 64},
+    {"name": "exceptions",    "direction": "output", "type": "data",  "width": 5}
+  ]
+}

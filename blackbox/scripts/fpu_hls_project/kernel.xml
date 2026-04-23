@@ -1,0 +1,23 @@
+<root versionMajor = "1" versionMinor = "5">
+  <kernel name="fpu_top" language="c" vlnv="xilinx.com:hls:fpu_top:1.0" attributes="" hash="" preferredWorkGroupSizeMultiple="0" workGroupSize="1" debug="false" compileOptions="" profileType="" hwControlProtocol="ap_ctrl_none">
+    <ports>
+      <port name="S_AXI_CONTROL" portType="addressable" mode="slave" base="0x0" range="0x7C" dataWidth="32"/>
+    </ports>
+    <args>
+      <arg id="0" name="clk" addressQualifier="0" port="S_AXI_CONTROL" hostOffset="0x0" hostSize="0x1" offset="0x10" size="0x4" type="unsigned int"/>
+      <arg id="1" name="rst_n" addressQualifier="0" port="S_AXI_CONTROL" hostOffset="0x0" hostSize="0x1" offset="0x18" size="0x4" type="unsigned int"/>
+      <arg id="2" name="ce" addressQualifier="0" port="S_AXI_CONTROL" hostOffset="0x0" hostSize="0x1" offset="0x20" size="0x4" type="unsigned int"/>
+      <arg id="3" name="valid_in" addressQualifier="0" port="S_AXI_CONTROL" hostOffset="0x0" hostSize="0x1" offset="0x28" size="0x4" type="unsigned int"/>
+      <arg id="4" name="precision" addressQualifier="0" port="S_AXI_CONTROL" hostOffset="0x0" hostSize="0x1" offset="0x30" size="0x4" type="unsigned int"/>
+      <arg id="5" name="op" addressQualifier="0" port="S_AXI_CONTROL" hostOffset="0x0" hostSize="0x1" offset="0x38" size="0x4" type="unsigned int"/>
+      <arg id="6" name="operand_a" addressQualifier="0" port="S_AXI_CONTROL" hostOffset="0x0" hostSize="0x8" offset="0x40" size="0x8" type="unsigned long long"/>
+      <arg id="7" name="operand_b" addressQualifier="0" port="S_AXI_CONTROL" hostOffset="0x0" hostSize="0x8" offset="0x4C" size="0x8" type="unsigned long long"/>
+      <arg id="8" name="valid_out" addressQualifier="0" port="S_AXI_CONTROL" hostOffset="0x0" hostSize="0x8" offset="0x58" size="0x4" type="void*"/>
+      <arg id="9" name="precision_out" addressQualifier="0" port="S_AXI_CONTROL" hostOffset="0x0" hostSize="0x8" offset="0x60" size="0x4" type="void*"/>
+      <arg id="10" name="result" addressQualifier="0" port="S_AXI_CONTROL" hostOffset="0x0" hostSize="0x8" offset="0x68" size="0x8" type="void*"/>
+      <arg id="11" name="exceptions" addressQualifier="0" port="S_AXI_CONTROL" hostOffset="0x0" hostSize="0x8" offset="0x74" size="0x4" type="void*"/>
+    </args>
+    <compileWorkGroupSize x="1" y="1" z="1"/>
+    <maxWorkGroupSize x="1" y="1" z="1"/>
+  </kernel>
+</root>
