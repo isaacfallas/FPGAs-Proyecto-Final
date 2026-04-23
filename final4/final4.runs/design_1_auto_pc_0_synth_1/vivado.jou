@@ -1,0 +1,24 @@
+#-----------------------------------------------------------
+# Vivado v2024.1 (64-bit)
+# SW Build 5076996 on Wed May 22 18:37:14 MDT 2024
+# IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
+# SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
+# Start of session at: Thu Apr 23 13:41:26 2026
+# Process ID: 15332
+# Current directory: C:/Users/umbre/Downloads/final4/final4.runs/design_1_auto_pc_0_synth_1
+# Command line: vivado.exe -log design_1_auto_pc_0.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source design_1_auto_pc_0.tcl
+# Log file: C:/Users/umbre/Downloads/final4/final4.runs/design_1_auto_pc_0_synth_1/design_1_auto_pc_0.vds
+# Journal file: C:/Users/umbre/Downloads/final4/final4.runs/design_1_auto_pc_0_synth_1\vivado.jou
+# Running On        :Caverna
+# Platform          :Windows Server 2016 or Windows 10
+# Operating System  :26200
+# Processor Detail  :Intel(R) Core(TM) Ultra 7 255H
+# CPU Frequency     :3686 MHz
+# CPU Physical cores:16
+# CPU Logical cores :16
+# Host memory       :42303 MB
+# Swap memory       :6442 MB
+# Total Virtual     :48746 MB
+# Available Virtual :19031 MB
+#-----------------------------------------------------------
+source design_1_auto_pc_0.tcl -notrace
